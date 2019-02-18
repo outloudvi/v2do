@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title> To-dos | v2do </title>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
+    <style>
+        #app {
+            margin-top: 20px
+        }
+        li {
+            margin: 5px 0
+        }
+        .onfinish {
+            margin-left: 5px !important
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app" class="ui container">
+        <h1 class="ui header">To-do list</h1>
+        <div id="todoList">
+            <ul>
+                <li v-for="(item, index) in todos" :key="index">
+                    <todoitem v-bind:index="index" v-bind:text="item"></todoitem>
+                </li>
+            </ul>
+        </div>
+        <div id="controls">
+            <div class="ui input">
+                <input type="text" id="inpText" placeholder="New todo...">
+            </div>
+            <input type="button" id="inpAdd" class="ui button primary" value="Add">
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script>
+    <script>
+
+        // Component definition
+        Vue.component('todoitem', {
+            props: ['index', 'text'],
+            template: "<span> {{ text }} <button v-on:click='removeItem(index)' class='ui button mini onfinish'> done! </button></span>",
+            methods: {
+                removeItem: function (index) {
+                    console.log(index)
+                    delete app.todos.splice(index, 1)
+                }
+            }
+        })
+
+        // Vueify
+        var app = new Vue({
+            el: '#app',
+            data: {
+                todos: [
+                    "a",
+                    "b"
+                ]
+            }
+        })
+
+        // Listeners
+        document.getElementById('inpAdd').addEventListener('click', () => {
+            app.todos.push(document.getElementById('inpText').value)
+            document.getElementById('inpText').value = ""
+        })
+        document.getElementById('inpText').addEventListener('keydown', function (e) {
+            if (!e) e = window.event;
+            var keyCode = e.keyCode || e.which;
+            if (keyCode == '13') {
+                document.getElementById('inpAdd').click()
+            }
+        })
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
+</body>
+
+</html>
