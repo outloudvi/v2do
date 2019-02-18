@@ -12,11 +12,22 @@
         #app {
             margin-top: 20px
         }
+
+        #todoList {
+            margin-bottom: 10px;
+            padding-left: 20px;
+        }
+
         li {
             margin: 5px 0
         }
+
         .onfinish {
             margin-left: 5px !important
+        }
+
+        .todoTitle {
+            font-size: 120%
         }
     </style>
 </head>
@@ -25,11 +36,10 @@
     <div id="app" class="ui container">
         <h1 class="ui header">To-do list</h1>
         <div id="todoList">
-            <ul>
-                <li v-for="(item, index) in todos" :key="index">
-                    <todoitem v-bind:index="index" v-bind:text="item"></todoitem>
-                </li>
-            </ul>
+            <div v-for="(item, index) in todos" :key="index">
+                <todoitem v-bind:index="index" v-bind:text="item.text"
+                    v-bind:createtime="new Date(item.createts).toLocaleString()"></todoitem>
+            </div>
         </div>
         <div id="controls">
             <div class="ui input">
@@ -38,13 +48,19 @@
             <input type="button" id="inpAdd" class="ui button primary" value="Add">
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script>
     <script>
 
         // Component definition
         Vue.component('todoitem', {
-            props: ['index', 'text'],
-            template: "<span> {{ text }} <button v-on:click='removeItem(index)' class='ui button mini onfinish'> done! </button></span>",
+            props: ['index', 'text', 'createtime'],
+            template: `
+<div>
+    <span class="todoTitle">{{ text }}</span> <br />
+    {{ createtime }} - <button v-on:click='removeItem(index)' class='ui button mini onfinish'> done! </button>
+</div>
+`.trim(),
             methods: {
                 removeItem: function (index) {
                     console.log(index)
@@ -58,22 +74,32 @@
             el: '#app',
             data: {
                 todos: [
-                    "a",
-                    "b"
+                    {
+                        text: "hello, world",
+                        createts: 0
+                    }
                 ]
             }
         })
 
         // Listeners
-        document.getElementById('inpAdd').addEventListener('click', () => {
-            app.todos.push(document.getElementById('inpText').value)
-            document.getElementById('inpText').value = ""
+        const $inpAdd = $('#inpAdd')
+        const $inpText = $('#inpText')
+
+        $inpAdd.click(() => {
+            let val = $inpText.val();
+            if (val === "") return;
+            app.todos.push({
+                text: val,
+                createts: new Date()
+            })
+            $inpText.val("")
         })
-        document.getElementById('inpText').addEventListener('keydown', function (e) {
+        $('#inpText').keypress((e) => {
             if (!e) e = window.event;
             var keyCode = e.keyCode || e.which;
             if (keyCode == '13') {
-                document.getElementById('inpAdd').click()
+                $inpAdd.click()
             }
         })
     </script>
