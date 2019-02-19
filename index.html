@@ -8,41 +8,15 @@
     <title> To-dos | v2do </title>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.css">
-    <style>
-        #app {
-            margin-top: 20px
-        }
-
-        #todoList {
-            margin-bottom: 10px;
-            padding-left: 20px;
-        }
-
-        li {
-            margin: 5px 0
-        }
-
-        .onfinish {
-            margin-left: 5px !important
-        }
-
-        .todoTitle {
-            font-size: 120%
-        }
-    </style>
+    <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
     <div id="app" class="ui container">
-        <h1 class="ui header">To-do list</h1>
-        <div id="todoList">
-            <div v-for="(item, index) in todos" :key="index">
-                <todoitem v-bind:index="index" v-bind:text="item.text"
-                    v-bind:createtime="new Date(item.createts).toLocaleString()"></todoitem>
-            </div>
-        </div>
+        <Todoheader v-bind:showfinished="showfinished" v-bind:todos="todos"></Todoheader>
+        <Todolist v-bind:showfinished="showfinished" v-bind:todos="todos"></Todolist>
         <div id="controls">
-            <div class="ui input">
+            <div id="divInput" class="ui input">
                 <input type="text" id="inpText" placeholder="New todo...">
             </div>
             <input type="button" id="inpAdd" class="ui button primary" value="Add">
@@ -50,59 +24,7 @@
     </div>
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/vue@2.6.6/dist/vue.js"></script>
-    <script>
-
-        // Component definition
-        Vue.component('todoitem', {
-            props: ['index', 'text', 'createtime'],
-            template: `
-<div>
-    <span class="todoTitle">{{ text }}</span> <br />
-    {{ createtime }} - <button v-on:click='removeItem(index)' class='ui button mini onfinish'> done! </button>
-</div>
-`.trim(),
-            methods: {
-                removeItem: function (index) {
-                    console.log(index)
-                    delete app.todos.splice(index, 1)
-                }
-            }
-        })
-
-        // Vueify
-        var app = new Vue({
-            el: '#app',
-            data: {
-                todos: [
-                    {
-                        text: "hello, world",
-                        createts: 0
-                    }
-                ]
-            }
-        })
-
-        // Listeners
-        const $inpAdd = $('#inpAdd')
-        const $inpText = $('#inpText')
-
-        $inpAdd.click(() => {
-            let val = $inpText.val();
-            if (val === "") return;
-            app.todos.push({
-                text: val,
-                createts: new Date()
-            })
-            $inpText.val("")
-        })
-        $('#inpText').keypress((e) => {
-            if (!e) e = window.event;
-            var keyCode = e.keyCode || e.which;
-            if (keyCode == '13') {
-                $inpAdd.click()
-            }
-        })
-    </script>
+    <script src="index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/semantic-ui@2.4.2/dist/semantic.min.js"></script>
 </body>
 
