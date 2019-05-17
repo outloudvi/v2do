@@ -18,6 +18,7 @@
 </template>
 
 <script lang="ts">
+import $ from 'jquery';
 import { Component, Vue } from 'vue-property-decorator';
 import { procTodoText, tsTodoItem } from './tsUtils';
 
@@ -27,13 +28,26 @@ export default class TodoAdd extends Vue {
 
   public addItem() {
     const sub = procTodoText(this.text);
-    this.$emit('add-todo', new tsTodoItem(sub.text, Number(new Date()), sub.tags));
+    this.$emit(
+      'add-todo',
+      new tsTodoItem(sub.text, Number(new Date()), sub.tags)
+    );
     this.text = '';
   }
 
   public checkSubmission(event: any) {
-    if (event.key !== 'Enter' || this.text.trim() === '') { return; }
+    if (event.key !== 'Enter' || this.text.trim() === '') {
+      return;
+    }
     this.addItem();
+    $('#inpAdd')
+      .removeClass('primary')
+      .addClass('green');
+    setTimeout(() => {
+      $('#inpAdd')
+        .removeClass('green')
+        .addClass('primary');
+    }, 200);
     event.preventDefault();
   }
 }
