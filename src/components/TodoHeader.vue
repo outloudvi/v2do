@@ -4,6 +4,7 @@
     <div class="ui horizontal label">{{ finlength }} / {{ length }}</div>
     <div class="ui button small" v-show="showfinished === false" @click="toggleFinished">Show finished</div>
     <div class="ui button small" v-show="showfinished" @click="toggleFinished">Hide finished</div>
+    <div class="ui button small" v-show="finlength > 10" @click="cleanFinshed">Archive finished</div>
   </h1>
 </template>
 
@@ -18,6 +19,11 @@ export default class TodoHeader extends Vue {
 
   @Emit('toggle-show-finished')
   public toggleFinished() {
+    return;
+  }
+
+  @Emit('archive-finished')
+  public cleanFinshed() {
     return;
   }
 }

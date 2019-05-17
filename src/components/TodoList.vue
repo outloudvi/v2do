@@ -6,6 +6,7 @@
       v-bind:length="todos.length"
       v-bind:finlength="todos.filter(item => item.finished).length"
       v-on:toggle-show-finished="toggleFinished"
+      v-on:archive-finished="archiveFinished"
     ></TodoHeader>
     <div id="todoList">
       <div v-for="(item, index) in showList()" :key="index">
@@ -40,6 +41,10 @@ export default class TodoList extends Vue {
 
   public toggleFinished() {
     this.showfinished = !this.showfinished;
+  }
+
+  public archiveFinished() {
+    this.todos = this.todos.filter(item => !item.finished)
   }
 
   public addTodo(item: tsTodoItem) {
