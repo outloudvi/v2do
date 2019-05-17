@@ -3,7 +3,7 @@
     <span class="todoTitle">{{ item.text }}</span>
     <br>
     #{{index}} -
-    {{ new Date(item.createts) }} -
+    {{ new Date(item.createts).toLocaleString() }} -
     <span v-if="item.tags.length">
       <TagList v-bind:tags="item.tags"></TagList> -
     </span>
