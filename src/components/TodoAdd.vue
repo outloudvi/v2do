@@ -18,8 +18,8 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import { tsTodoItem, procTodoText } from './tsUtils';
+import { Component, Vue } from 'vue-property-decorator';
+import { procTodoText, tsTodoItem } from './tsUtils';
 
 @Component
 export default class TodoAdd extends Vue {

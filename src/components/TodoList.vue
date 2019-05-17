@@ -21,14 +21,14 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import { tsTodoItem } from './tsUtils';
-import TodoAdd from './TodoAdd.vue';
-import TodoItem from './TodoItem.vue';
-import TodoHeader from './TodoHeader.vue';
+import { Component, Vue, Watch } from "vue-property-decorator";
+import TodoAdd from "./TodoAdd.vue";
+import TodoHeader from "./TodoHeader.vue";
+import TodoItem from "./TodoItem.vue";
+import { getFromLocalStorage, saveToLocalStorage, tsTodoItem } from "./tsUtils";
 
 @Component({
-  components: { TodoItem, TodoAdd, TodoHeader },
+  components: { TodoItem, TodoAdd, TodoHeader }
 })
 export default class TodoList extends Vue {
   public todos: tsTodoItem[] = [];

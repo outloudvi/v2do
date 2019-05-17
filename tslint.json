@@ -17,6 +17,7 @@
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
     "class-name": false,
+    "import-name": false,
     "no-relative-imports": false
   }
 }

@@ -12,10 +12,10 @@
 </template>
 
 <script lang="ts">
-import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import { tsTodoItem } from './tsUtils';
-import TaskBtn from './TaskBtn.vue';
+import { Component, Emit, Prop, Vue } from 'vue-property-decorator';
 import TagList from './TagList.vue';
+import TaskBtn from './TaskBtn.vue';
+import { tsTodoItem } from './tsUtils';
 
 @Component({
   components: { TaskBtn, TagList },
