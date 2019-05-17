@@ -8,7 +8,6 @@ export class tsTodoItem {
         this.text = text;
         this.createts = createts;
         this.tags = tags;
-        this.finished = false;
     }
 }
 
@@ -19,4 +18,32 @@ export function procTodoText(text: string) {
         tags,
         text: retx,
     };
+}
+
+export function saveToLocalStorage(todos: tsTodoItem[]) {
+    window.localStorage.setItem('todos', JSON.stringify(todos));
+}
+
+export function getFromLocalStorage(): tsTodoItem[] {
+    const itemstr = window.localStorage.getItem('todos');
+    try {
+        const items = JSON.parse(<string>itemstr);
+        if (itemChecker(items)) return items;
+        return [];
+    } catch {
+        return [];
+    }
+    return [];
+}
+
+function itemChecker(items: any): boolean {
+    if (typeof items !== typeof []) return false;
+    for (let i of items) {
+        if (i.tags === undefined
+            || i.createts == undefined
+            || i.text === undefined
+            || i.finished === undefined)
+            return false;
+    }
+    return true
 }

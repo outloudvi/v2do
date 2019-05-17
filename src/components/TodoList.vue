@@ -47,7 +47,17 @@ export default class TodoList extends Vue {
   }
 
   private showList() {
-    return this.todos.filter((item) => this.showfinished || !item.finished);
+    return this.todos.filter(item => this.showfinished || !item.finished);
+  }
+
+  @Watch('todos', { deep: true })
+  onTodoChange(val: tsTodoItem[], oldval: tsTodoItem[]) {
+    saveToLocalStorage(val);
+  }
+
+  constructor() {
+    super();
+    this.todos = getFromLocalStorage();
   }
 }
 </script>
@@ -55,10 +65,10 @@ export default class TodoList extends Vue {
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
 h1 {
-  margin-top: 24px !important
+  margin-top: 24px !important;
 }
 
 #todoAdd {
-  margin-top: 10px
+  margin-top: 10px;
 }
 </style>
