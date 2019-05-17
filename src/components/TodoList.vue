@@ -22,11 +22,11 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue, Watch } from "vue-property-decorator";
-import TodoAdd from "./TodoAdd.vue";
-import TodoHeader from "./TodoHeader.vue";
-import TodoItem from "./TodoItem.vue";
-import { getFromLocalStorage, saveToLocalStorage, tsTodoItem } from "./tsUtils";
+import { Component, Vue, Watch } from 'vue-property-decorator';
+import TodoAdd from './TodoAdd.vue';
+import TodoHeader from './TodoHeader.vue';
+import TodoItem from './TodoItem.vue';
+import { getFromLocalStorage, saveToLocalStorage, tsTodoItem } from './tsUtils';
 
 @Component({
   components: { TodoItem, TodoAdd, TodoHeader }
