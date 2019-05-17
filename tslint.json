@@ -1,20 +1,22 @@
 {
   "defaultSeverity": "warning",
   "extends": [
-    "tslint:recommended"
+    "tslint-microsoft-contrib/recommended"
   ],
   "linterOptions": {
     "exclude": [
       "node_modules/**"
     ]
   },
+  "rulesDirectory": ["node_modules/tslint-microsoft-contrib"],
   "rules": {
     "quotemark": [true, "single"],
     "indent": [true, "spaces", 2],
     "interface-name": false,
-    "ordered-imports": false,
+    "ordered-imports": true,
     "object-literal-sort-keys": false,
     "no-consecutive-blank-lines": false,
-    "class-name": false
+    "class-name": false,
+    "no-relative-imports": false
   }
 }
