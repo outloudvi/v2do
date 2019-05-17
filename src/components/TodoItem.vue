@@ -5,7 +5,7 @@
     #{{index}} -
     {{ new Date(item.createts) }} -
     <span v-if="item.tags.length">
-      <Taglist v-bind:tags="item.tags"></Taglist>-
+      <TagList v-bind:tags="item.tags"></TagList> -
     </span>
     <TaskBtn v-bind:finished="item.finished" v-bind:index="index" v-on:toggle-item="toggleItem"></TaskBtn>
   </div>
@@ -13,7 +13,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import tsTodoItem from './tsTodoItem';
+import { tsTodoItem } from './tsUtils';
 import TaskBtn from './TaskBtn.vue';
 import TagList from './TagList.vue';
 

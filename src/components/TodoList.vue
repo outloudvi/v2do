@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="ui container">
     <h1 class="ui header">The To-do List</h1>
     <TodoHeader
       v-bind:showfinished="showfinished"
@@ -16,13 +16,13 @@
         ></TodoItem>
       </div>
     </div>
-    <TodoAdd v-on:add-todo="addTodo"></TodoAdd>
+    <TodoAdd id="todoAdd" v-on:add-todo="addTodo"></TodoAdd>
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
-import tsTodoItem from './tsTodoItem';
+import { tsTodoItem } from './tsUtils';
 import TodoAdd from './TodoAdd.vue';
 import TodoItem from './TodoItem.vue';
 import TodoHeader from './TodoHeader.vue';
@@ -54,4 +54,11 @@ export default class TodoList extends Vue {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped lang="scss">
+h1 {
+  margin-top: 24px !important
+}
+
+#todoAdd {
+  margin-top: 10px
+}
 </style>

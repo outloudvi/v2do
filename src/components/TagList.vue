@@ -1,6 +1,6 @@
 <template>
   <span>
-    <span v-for="tag in tags" :key="tag">#{{ tag }}</span>
+    <span v-for="tag in tags" :key="tag">#{{ tag }} </span>
   </span>
 </template>
 
@@ -9,7 +9,7 @@ import { Component, Prop, Vue, Emit } from 'vue-property-decorator';
 
 @Component
 export default class TagList extends Vue {
-  @Prop() public tags: string[] = [];
+  @Prop() public tags!: string[];
 }
 </script>
 
